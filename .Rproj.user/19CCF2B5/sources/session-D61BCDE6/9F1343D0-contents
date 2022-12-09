@@ -1,0 +1,5 @@
+ginkgo= read.csv(here("data", "ginkgo_data_2022.csv"))
+ginkgo_sub= subset(ginkgo, select= c("seeds_present", "site_id"))
+unique(ginkgo_sub$site_id)
+
+plot(max_width ~ max_depth, data= ginkgo, main= "Scatterplot of max Ginkgo leaf depth by width")

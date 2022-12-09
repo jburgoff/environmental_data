@@ -1,0 +1,15 @@
+data(iris)
+plot(
+  Petal.Width ~ Petal.Length,
+  data = iris,
+  xlab = "Petal Length (cm)",
+  ylab = "Petal Width (cm)")
+fit_petals = 
+  lm(
+    Petal.Width ~ Petal.Length,
+    data = iris)
+
+zero = as.data.frame(0)
+four = as.data.frame(4)
+summary(fit_petals)
+predict(fit_petals, newdata= four)

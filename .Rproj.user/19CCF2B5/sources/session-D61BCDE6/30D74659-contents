@@ -1,0 +1,16 @@
+dbinom(3, size= 4, prob= 0.75)
+pbinom(3, size= 4,  prob= 0.75)
+1-pbinom(3, size= 5, prob= 0.75)
+pnorm(1.2, mean= 2, sd= 2)
+1-pnorm(1.2, mean=2, sd=2)
+
+oneorless<-pnorm(1.2, mean = 2, sd = 2)
+threeorless<-pnorm(3.2, mean = 2, sd = 2)
+answer<-threeorless-oneorless
+answer
+
+cat(letters[sample(26, size = 3, replace = T)], sep = "")
+
+
+qt(df=10)
+

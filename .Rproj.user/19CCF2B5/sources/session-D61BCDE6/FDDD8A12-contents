@@ -1,0 +1,2 @@
+hist(bird.sta$BHGR, main= "Histogram of Black-headed Grosbeak Abundance", xlab= "Number of birds counted", breaks= 0:5 - 0.5)
+

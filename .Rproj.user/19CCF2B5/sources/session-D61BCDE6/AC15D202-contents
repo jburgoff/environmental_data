@@ -1,0 +1,77 @@
+exp_fun = function(x, a, b) 
+{
+  return(a *exp(-b * x))
+}
+curve(
+  exp_fun(x, 2.2, 1/15), add = FALSE, from = 0, to = 50,
+  ann = FALSE, axes = TRUE, ylab = "f(x)"); box()
+
+curve(exp_fun(x, 1.9, 0.1), add = TRUE, from = 0, to = 50, ann = FALSE, axes = TRUE, ylab = "f(x)"); box()
+curve(exp_fun(x, 1.9, 0.3), lty = "dotted", add = TRUE, from = 0, to = 50, ann = FALSE, axes = TRUE, ylab = "f(x)"); box()
+curve(exp_fun(x, 1.2, 0.2), col= "red", add = TRUE, from = 0, to = 50, ann = FALSE, axes = TRUE, ylab = "f(x)"); box()
+curve(exp_fun(x, 1.2, 0.4), col= "red", lty = "dotted", add = TRUE, from = 0, to = 50, ann = FALSE, axes = TRUE, ylab = "f(x)"); box()
+
+ricker_fun = function(x, a, b) 
+{
+  return(a * x * exp(-b * x))
+}
+
+curve(ricker_fun(x, 20, 0.4), from = 0, to = 50, 
+      add = TRUE, ylab = "f(x)", xlab = "x")
+curve(ricker_fun(x, 20, 0.2), lty= "dotted", from = 0, to = 50, 
+      add = TRUE, ylab = "f(x)", xlab = "x")
+curve(ricker_fun(x, 10, 0.2), lty= "dotted", from = 0, to = 50, 
+      add = TRUE, ylab = "f(x)", xlab = "x")
+curve(ricker_fun(x, 75, 0.3), col= "red", from = 0, to = 50, 
+      add = TRUE, ylab = "f(x)", xlab = "x")
+curve(ricker_fun(x, 50, 0.3), col= "red", lty= "dotted", from = 0, to = 50, 
+      add = TRUE, ylab = "f(x)", xlab = "x")
+curve(ricker_fun(x, 40, 0.3), col= "red", lty= "dotted", from = 0, to = 50, 
+      add = TRUE, ylab = "f(x)", xlab = "x")
+
+line_point_slope = function(x, x1, y1, slope)
+{
+  get_y_intercept = 
+    function(x1, y1, slope) 
+      return(-(x1 * slope) + y1)
+  
+  linear = 
+    function(x, yint, slope) 
+      return(yint + x * slope)
+  
+  return(linear(x, get_y_intercept(x1, y1, slope), slope))
+}
+
+
+
+
+plot(
+  dispersal$dist.class,
+  dispersal$disp.rate.ftb,
+  xlim = c(0, 1500),
+  xlab = "distance class", 
+  ylab = "standardized dispersal rate", 
+  main = "Marbled Salamander - first time breeders\n ricker model")
+curve(ricker_fun(x, 1/210, 1/275), from = 0, to = 1500, 
+      add = TRUE, ylab = "f(x)", xlab = "x")
+
+observed= dispersal$disp.rate.ftb
+
+ricker_predicted= ricker_fun(dispersal$dist.class, 1/210, 1/275)
+resids_ricker= c(observed - ricker_predicted)
+
+exp_predicted= exp_fun(dispersal$dist.class, 1/200, 1/200)
+resids_exp= c(observed- exp_predicted)
+
+linear_predicted= line_point_slope(dispersal$dist.class, 750, 0.3, -0.0005)
+resids_linear= c(observed - linear_predicted)
+
+
+dat_resids= data.frame(dispersal$disp.rate.ftb,resids_linear, resids_exp, resids_ricker)
+
+
+curve(line_point_slope(x, 750, 0.3, -0.0005), add = TRUE)
+par(mfrow = c(1, 3))
+hist(dat_resids$resids_linear, main= "Histogram of linear residuals")
+hist(dat_resids$resids_exp, main= "Histogram of exponential residuals")
+hist(dat_resids$resids_ricker, main= "Histogram of ricker residuals")

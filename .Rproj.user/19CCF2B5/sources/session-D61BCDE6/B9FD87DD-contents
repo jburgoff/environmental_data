@@ -1,0 +1,17 @@
+---
+title: "R Markdown Documents - Part 1"
+subtitle: "Analysis of Environmental Data"
+author: Julian Burgoff
+toc: true
+toc_float: true
+output: html_notebook
+---
+
+
+# Hi my name is **Julian Burgoff** and I am a MS student in *Environmental Conservation*
+
+# 1. Dealing with large datasets
+2. Modeling
+
+# *Aquatic Ecology
+* Fisheries Science and Management

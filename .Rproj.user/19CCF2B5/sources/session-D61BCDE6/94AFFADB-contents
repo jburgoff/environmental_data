@@ -1,0 +1,31 @@
+hist(catrate$cat.rate, main= "Histogram of catastrophe rates", xlab= "Catastrophe rate")
+shapiro.test(catrate$cat.rate)
+t.test(catrate$cat.rate, mu= 0.28)
+t.test(catrate$cat.rate, mu= 0.28, alternative= "less")
+
+wilcox.test(catrate$cat.rate, mu = 2 / 7)
+
+
+require(palmboxplot(
+  flipper_length_mm ~ species, 
+  data = penguin_dat,
+  ylab = "Flipper Length (mm)")
+erpenguins)
+## Loading required package: palmerpenguins
+penguin_dat = droplevels(subset(penguins, species != "Gentoo"))
+
+# Extract the Adelie penguin data
+dat_adelie = subset(penguin_dat, species == "Adelie")
+shapiro.test(dat_adelie$flipper_length_mm)
+
+dat_chinstrap= subset(penguin_dat, species== "Chinstrap")
+shapiro.test(dat_chinstrap$flipper_length_mm)
+
+
+par(mfrow = c(1, 2))
+hist(dat_adelie$flipper_length_mm, main= "histogram of Adelie penguin flipper lengths", xlab= "flipper length (mm)")
+hist(dat_chinstrap$flipper_length_mm, main= "histogram of Chinstrap penguin flipper lengths", xlab= "flipper length (mm)")
+
+
+t.test(flipper_length_mm ~ species, 
+       data = penguin_dat)

@@ -1,0 +1,91 @@
+require(here)
+rope= read.csv(here("data", "rope.csv"))
+rope$rope.type= factor(rope$rope.type)
+levels(rope$rope.type)
+
+n_obs= length(rope$rope.type)
+n_groups= length(unique(rope$rope.type))
+                 
+ss_tot= sum((rope$p.cut- mean(rope$p.cut))^2)
+print(ss_tot)
+
+agg_resids= aggregate(
+  x = rope$p.cut,
+  by = list(rope$rope.type),
+  FUN = function(x) sum((x-mean(x))^2)
+
+str(agg_resids)
+
+agg_sum_sq_resids=aggregate(
+  x = rope$p.cut,
+  by = list(rope$rope.type),
+  FUN = function(x) sum((x-mean(x))^2)
+)
+str(agg_sum_sq_resids)
+
+ss_within= sum(agg_sum_sq_resids$x)
+
+ss_among = ss_tot - ss_within
+
+df_tot= n_obs-1
+
+df_within= n_obs-n_groups
+
+df_among= n_groups-1
+ms_among  =  ss_among / (n_groups - 1)
+ms_within = ss_within / (n_obs - n_groups)
+
+f_ratio= ms_among/ ms_within
+
+f_pval= pf(f_ratio, df1 = df_among, df2= df_within, lower.tail= FALSE)
+
+bartlett.test(p.cut ~ rope.type, data=rope)
+
+fit_rope_1 = lm(p.cut ~ rope.type, data = rope)
+summary(fit_rope_1)
+resids=residuals(fit_rope_1)
+shapiro.test(residuals(fit_rope_1))
+
+
+shapiro.test(
+
+BLAZE= subset(agg_resids, Group.1 %in% c("BLAZE"))
+shapiro.test(agg_resids)
+
+require(palmerpenguins)
+pen_fem = subset(penguins, sex == "female")
+
+
+VEL=subset(rope, rope.type %in% c("VEL"))
+resids_VEL= VEL$p.cut-mean(VEL$p.cut)
+shapiro.test(resids_VEL)
+
+SB=subset(rope, rope.type %in% c("SB")) 
+resids_SB= SB$p.cut-mean(SB$p.cut)
+shapiro.test(resids_SB)
+
+
+BLAZE= subset(rope, rope.type %in% c("BLAZE"))
+resids_BLAZE= BLAZE$p.cut-mean(BLAZE$p.cut)
+shapiro.test(resids_BLAZE)
+
+BS= subset(rope, rope.type %in% c("BS"))
+resids_BS= BS$p.cut-mean(BS$p.cut)
+shapiro.test(resids_BS)
+
+PI= subset(rope, rope.type %in% c("PI"))
+resids_PI= PI$p.cut-mean(PI$p.cut)
+shapiro.test(resids_PI)
+
+XTC= subset(rope, rope.type %in% c("XTC"))
+resids_XTC= XTC$p.cut-mean(XTC$p.cut)
+shapiro.test(resids_XTC)
+
+boxplot(body_mass_g ~ species, data = pen_fem)
+bartlett.test(body_mass_g ~ species, data = pen_fem)
+
+lm_pen=lm(body_mass_g ~ species, data = pen_fem)
+shapiro.test(lm_pen$residuals)
+
+lm_pen_HSD= TukeyHSD(aov(lm_pen))
+round(lm_pen_HSD$species, digits = 4)

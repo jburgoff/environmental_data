@@ -1,0 +1,29 @@
+require(here)
+dat_habitat=read.csv(here("data", "hab.sta.csv"))
+par(mfrow = c(1, 3))
+hist(dat_habitat$elev, xlab= "elevation", main= "Histogram of sample site elevation")
+hist(dat_habitat$slope, xlab= "slope", main= "Histogram of sampling site slope")
+hist(dat_habitat$aspect, xlab= "aspect", main= "Histogram of sampling site aspect")
+
+line_point_slope = function(x, x1, y1, slope)
+{
+  get_y_intercept = 
+    function(x1, y1, slope) 
+      return(-(x1 * slope) + y1)
+  
+  linear = 
+    function(x, yint, slope) 
+      return(yint + x * slope)
+  
+  return(linear(x, get_y_intercept(x1, y1, slope), slope))
+}
+
+plot(ba.tot~elev, data=dat_habitat, xlab= "elevation", ylab= "total basal area", main= "Scatterplot of elevation versus total basal area")
+curve(line_point_slope(x, x1 = 0, y1 = 25, slope = 0), add = TRUE)
+
+plot(ba.tot~slope, data=dat_habitat, xlab= "slope", ylab= "total basal area", main= "Scatterplot of slope versus total basal area")
+curve(line_point_slope(x, x1 = 10, y1 = 15, slope = 0.3), add = TRUE)
+
+
+plot(ba.tot~aspect, data=dat_habitat, xlab= "aspect", ylab= "total basal area", main= "Scatterplot of aspect versus total basal area")
+curve(line_point_slope(x, x1 = 10, y1 = 10, slope = 0.05), add = TRUE)
