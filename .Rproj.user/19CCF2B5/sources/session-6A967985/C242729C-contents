@@ -1,0 +1,12 @@
+---
+title: "Julian's Project Homepage"
+author: "Julian Burgoff"
+date: "2022-12-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Welcome to Julian's class page
