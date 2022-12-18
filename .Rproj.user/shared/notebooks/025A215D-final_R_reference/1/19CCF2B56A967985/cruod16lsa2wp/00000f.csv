@@ -1,0 +1,5 @@
+"0","ginkgo = read.csv(here(""data"",""ginkgo_data_2022""))
+"
+"2","Warning: cannot open file 'C:/Users/Owner/Documents/environmental_data/data/ginkgo_data_2022': No such file or directory"
+"2","Error in file(file, ""rt"") : cannot open the connection
+"

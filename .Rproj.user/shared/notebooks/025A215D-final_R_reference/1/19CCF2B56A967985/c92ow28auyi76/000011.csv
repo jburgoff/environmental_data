@@ -1,0 +1,24 @@
+"0","## Create a vector of numbers:
+num_vec  = c(1, 2, 3, 4, 5)
+
+## Create a vector of characters:
+char_vec = c(""data"", ""analysis"", ""is cool"")
+
+## Type name of vector to print contents
+num_vec
+"
+"1","[1]"
+"1"," 1"
+"1"," 2"
+"1"," 3"
+"1"," 4"
+"1"," 5"
+"1","
+"
+"0","char_vec"
+"1","[1]"
+"1"," ""data""    "
+"1"," ""analysis"""
+"1"," ""is cool"" "
+"1","
+"

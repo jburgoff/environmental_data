@@ -1,0 +1,56 @@
+
+
+
+summary(delomys$body_mass)
+summary(delomys$body_length)
+
+shapiro.test(delomys$body_mass)
+shapiro.test(delomys$body_length)
+
+plot(delomys$body_length~delomys$body_mass, xlab= "Body mass", ylab= "Body length", main= "Scatterplot of Delomys body mass and body length")
+
+
+hist(delomys$body_mass, xlab= "Body mass", main= "Histogram of Delomys body mass")
+hist(delomys$body_length, xlab= "Body length", main= "Histogram of Delomys body length")
+
+
+
+boxplot(delomys$body_mass~delomys$binomial, xlab= "Species", ylab= "Body mass", main= "Boxplot of Delomys body mass by species")
+boxplot(delomys$body_mass~delomys$sex, xlab= "Sex", ylab= "Body mass", main= "Boxplot of Delomys body mass by sex")
+boxplot(delomys$body_mass~delomys$binomial+delomys$sex, xlab= "Species by sex", ylab= "Body mass", names= c("dorsalis Female", "sublineatus Female", "dorsalus Male", "sublineatus Male"), main= "Boxplot of delomys body mass by species and sex")
+
+
+
+
+DD= subset(delomys, binomial %in% c("Delomys dorsalis"))
+DS= subset(delomys, binomial %in% c("Delomys sublineatus"))
+boxplot(DD$body_mass~DD$sex)
+boxplot(DS$body_mass~DS$sex)
+
+fit_1= lm(body_length ~ body_mass, data= delomys)
+knitr::kable(coef(summary(fit_1)))
+shapiro.test(residuals(fit_1))
+
+fit_2= lm(body_mass ~ sex, data = delomys)
+anova(fit_2)
+knitr::kable(coef(summary(fit_2)))
+shapiro.test(residuals(fit_2))
+AIC(fit_2)
+AIC(fit_3)
+AIC(fit_4)
+AIC(fit_5)
+
+fit_3= lm(body_mass ~ binomial, data= delomys)
+anova(fit_3)
+knitr::kable(coef(summary(fit_3)))
+shapiro.test(residuals(fit_3))
+
+fit_4= lm(body_mass ~ sex + binomial, data= delomys)
+anova(fit_4)
+knitr::kable(coef(summary(fit_4)))
+shapiro.test(residuals(fit_4))
+
+fit_5= lm(body_mass ~ sex * binomial, data= delomys)
+anova(fit_5)
+knitr::kable(coef(summary(fit_5)))
+shapiro.test(residuals(fit_5))
