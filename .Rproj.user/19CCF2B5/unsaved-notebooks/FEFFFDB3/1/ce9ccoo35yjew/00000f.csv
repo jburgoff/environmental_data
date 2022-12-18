@@ -1,0 +1,2 @@
+"0","# Subset penguins data frame to retrieve data on Adelie penguins from the species column"
+"0","adelie_subset= subset(penguins, species %in% c(""Adelie""))"

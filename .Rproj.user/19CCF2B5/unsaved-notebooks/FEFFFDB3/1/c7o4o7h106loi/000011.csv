@@ -1,0 +1,4 @@
+"0",""
+"0","#conditional boxplot of petiole length conditioned on the seeds_present column of the ginkgo data"
+"0",""
+"0","boxplot(ginkgo$petiole_length~ginkgo$seeds_present, xlab= ""Seeds present"", ylab= ""Petiole length (mm)"", main= ""Conditional boxplot of petiole length conditioned on seed presence"")"

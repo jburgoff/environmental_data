@@ -1,0 +1,27 @@
+{
+    "id": "FEFFFDB3",
+    "path": "~/environmental_data/docs/index.Rmd",
+    "project_path": "docs/index.Rmd",
+    "type": "r_markdown",
+    "hash": "2803291364",
+    "contents": "",
+    "dirty": false,
+    "created": 1671324504599.0,
+    "source_on_save": false,
+    "relative_order": 77,
+    "properties": {
+        "tempName": "Untitled20",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "232,0",
+        "scrollLine": "220"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1671324597,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1671324597917,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,2 @@
+"0",""
+"0","hist(ginkgo$max_depth, xlab= ""Max depth (mm)"", main= ""Histogram of max ginkgo leaf depth"")"

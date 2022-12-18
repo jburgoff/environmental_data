@@ -1,0 +1,3 @@
+"0","matrix_example <- matrix(c(5,10,15, 25,30,35), nrow = 2, ncol = 3, byrow = TRUE,"
+"0","               dimnames = list(c(""row_1"", ""row_2""), c(""C_1"", ""C_2"", ""C_3"")))"
+"0","View(matrix_example)"

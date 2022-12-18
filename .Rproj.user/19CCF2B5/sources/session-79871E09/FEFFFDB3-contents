@@ -1,0 +1,232 @@
+---
+title: "Julian's R-Studio Reference Guide"
+author: "Julian Burgoff"
+date: "2022-12-18"
+output: html_document
+---
+
+## Loading Data and Packages
+
+```{r}
+#Use library() to load previously installed packages
+
+library(here)
+library(palmerpenguins)
+
+#Use require() to load previously installed packages
+
+require(here)
+require(palmerpenguins)
+
+#Use read.csv() and here() to read data files
+
+ginkgo = read.csv(here("data","ginkgo_data_2022.csv"))
+```
+
+## Data Structures
+
+The c() function combines arguments of the same type (numeric, character) into a vector.
+
+```{r}
+## Create a vector of numbers:
+num_vec  = c(1, 2, 3, 4, 5)
+
+## Create a vector of characters:
+char_vec = c("data", "analysis", "is cool")
+
+## Type name of vector to print contents
+num_vec
+char_vec
+
+```
+
+The length() function gets or sets the length of objects including vectors and lists in R.
+
+```{r}
+#Get length of vector
+x <- c(1,2,4,8,10,13,15,19)
+length(x)
+```
+
+The matrix() function creates a matrix from a given set of values
+
+```{r}
+matrix_example <- matrix(c(5,10,15, 25,30,35), nrow = 2, ncol = 3, byrow = TRUE,
+               dimnames = list(c("row_1", "row_2"), c("C_1", "C_2", "C_3")))
+View(matrix_example)
+```
+
+The data.frame() function creates data frames which are collections of variables similar to matrices and lists. You can also turn matrices into data.frames using this function.
+
+```{r}
+data_frame <- data.frame(x1 = 1:10,
+                    x2 = letters[1:10],
+                    x3 = c(5, 10, 15, 20, 25,30,35,40,45,50),
+                    x4 = "more data")
+data_frame                             # print the data frame
+
+data_frame_from_matrix= data.frame(matrix_example)
+data_frame_from_matrix         #print the converted data frame
+
+```
+
+The nrow() and ncol() functions return the number of rows and columns in a data.frame and the dim() function is used to get or set the dimensions of a data.frame
+
+```{r}
+# Investigate dimensions of previously loaded ginkgo data.frame
+nrow(ginkgo) # number of rows
+ncol(ginkgo) # number of columns
+dim(ginkgo) # both number of rows and columns
+```
+
+## Subsetting Data
+
+\$ is used to select columns by name within a data.frame
+
+```{r}
+# Select the max_width column in the ginkgo data frame and assign it to a variable
+
+width_ginkgo= ginkgo$max_width
+width_ginkgo
+
+```
+
+[] is used to subset data.frames by position. Within the brackets, numbers to the left of the comma refer to position within rows and numbers to the right of the comma refer to position within columns
+
+```{r}
+#Select the first row in the ginkgo data.frame
+ginkgo[1, ]
+
+#Select the element in row 2 column 3 of the ginkgo data.frame
+ginkgo[2,3]
+
+#Select the 3rd column of the ginkgo data.frame. Without a comma, the subset returns a complete column
+ginkgo[3]
+
+```
+
+The subset() function is another way to subset a data.frame.
+
+```{r}
+# Subset penguins data frame to retrieve data on Adelie penguins from the species column
+adelie_subset= subset(penguins, species %in% c("Adelie"))
+```
+
+## Numerical Data Exploration
+
+The summary() function automatically calculates summary statistics of a vector or data.frame
+
+```{r}
+#summary of previously loaded penguins data
+
+summary(penguins)
+```
+
+The mean() function gives the arithmetic mean of a vector
+
+```{r}
+# calculate the mean bill length of Adelie penguins from the previously subsetted data.frame
+
+mean(adelie_subset$bill_length_mm, na.rm= TRUE)  #na.rm argument strips missing values
+```
+
+The sd() function calculates the standard deviation of an R object
+
+```{r}
+# Calculate standard deviation of bill lengths of Adelie penguins using subsetted data.frame
+
+sd(adelie_subset$bill_length_mm, na.rm= TRUE)
+# na.rm argument omits missing values
+```
+
+## Graphical Data Exploration
+
+The plot() function is used to create generic plots of objects in R
+
+```{r}
+# Scatterplot of max leaf depth and max leaf width from the ginkgo data
+plot(ginkgo$max_depth, ginkgo$max_width,
+     col=2,     #col changes point color
+     pch=19,    #pch changes character type
+     cex= 0.5,   #cex changes point size
+     main="Ginkgo leaf max depth vs width", #main provides a title for the plot
+     xlab= "Max leaf depth", #xlab provides a label for the x axis
+     ylab= "Max leaf width", #ylab provides a label for the y axis
+     xlim= c(20,100), #xlim sets x range
+     ylim = c(30,130) #ylim sets y range
+)
+```
+
+The hist() function computes a histogram from given data values
+
+```{r}
+#Create a histogram of penguin flipper lengths using the previously loaded penguins data
+hist(penguins$flipper_length_mm, main= "Histogram of penguin flipper lengths", xlab= "Flipper length (mm)",
+     breaks= 8, #breaks argument specifies cell boundaries
+)
+```
+
+The boxplot() function creates box and whisker plots of grouped values
+
+```{r}
+#boxplot of petiole lengths using ginkgo data
+
+boxplot(ginkgo$petiole_length, ylab= "petiole length (mm)", main= "Boxplot of ginkgo leaf petiole lengths")
+
+#conditional boxplot of petiole length conditioned on the seeds_present column of the ginkgo data
+
+boxplot(ginkgo$petiole_length~ginkgo$seeds_present, xlab= "Seeds present", ylab= "Petiole length (mm)", main= "Conditional boxplot of petiole length conditioned on seed presence")
+
+# 4 panel figure of histograms
+par(mfrow= c(2,2)) # creates 2X2 matrix of plots
+hist(ginkgo$max_width, xlab= "Max width (mm)", main= "Histogram of max ginkgo leaf width")
+
+hist(ginkgo$max_depth, xlab= "Max depth (mm)", main= "Histogram of max ginkgo leaf depth")
+
+hist(ginkgo$notch_depth, xlab= "Notch depth (mm)", main= "Histogam of ginkgo leaf notch depth")
+
+hist(ginkgo$petiole_length, xlab= "Petiole length (mm)", main= "Histogram of ginkgo leaf petiole length")
+```
+
+## Distribution Functions
+
+dnorm() function gives the value of the probability density function given a random variable, population mean, and population standard deviation
+```{r}
+#Find the value of the normal distribution pdf at x=2, mean=0, sd=1
+dnorm(x=2,mean=0,sd=1)
+```
+The pnorm() function gives the value of the cumulative density function of the normal distribution given a random variable, population mean, and population standard deviation
+
+In this example we are calculating the percentage of fish longer than 50 mm in a pond where the lengths of fish in this population are normally distributed with a mean of 40 mm and a standard deviation of 2 mm
+```{r}
+pnorm(50, mean= 48, sd=2, lower.tail= FALSE #FALSE lower.tail because we want to know the percentage of fish longer than 50mm
+)
+#15.9 percent of fish are longer than 50 mm in this pond
+```
+The qnorm() function gives the value of the inverse cumulitive density function given a random variable, the population mean, and population standard deviation
+
+```{r}
+qnorm(0.75, mean=0, sd=1)
+```
+
+The dbinom() calculates the probability binomial mass function for a given set of values, number of trials, and probability of success
+
+```{r}
+#calculate the binomial probability mass function for x= 1:5 and a probability of success in each trial of 0.5
+
+dbinom(x=1:5, size= 10, prob=0.5)
+```
+
+The pbinom() function calculates the probability of a variable (x) following a binomial distribution with values less than or equal to x
+```{r}
+#Calculate the probability of success occurring less than 5 times if the number of trials is 20 and the probability of success is 0.2
+pbinom(5, size=20, prob= 0.2)
+#probability is 80%
+
+```
+Given a set of probabilities, use the qbinom() function to get the corresponding binomial quantile
+
+```{r}
+#Get the binomial quantile for the probability 0.5 if n= 10 and p=0.8
+qbinom(p=0.5, size= 10, prob=0.8) #8
+```
