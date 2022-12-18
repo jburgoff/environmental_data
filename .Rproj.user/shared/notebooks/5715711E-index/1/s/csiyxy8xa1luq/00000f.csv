@@ -1,0 +1,7 @@
+"0","pnorm(50, mean= 48, sd=2, lower.tail= FALSE #FALSE lower.tail because we want to know the percentage of fish longer than 50mm"
+"0",")"
+"1","[1]"
+"1"," 0.1586553"
+"1","
+"
+"0","#15.9 percent of fish are longer than 50 mm in this pond"

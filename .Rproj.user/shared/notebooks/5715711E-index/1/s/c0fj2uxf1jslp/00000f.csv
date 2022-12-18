@@ -1,0 +1,8 @@
+"0","# Calculate standard deviation of bill lengths of Adelie penguins using subsetted data.frame"
+"0",""
+"0","sd(adelie_subset$bill_length_mm, na.rm= TRUE)"
+"1","[1]"
+"1"," 2.663405"
+"1","
+"
+"0","# na.rm argument omits missing values"

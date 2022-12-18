@@ -1,0 +1,8 @@
+"0","#Calculate the probability of success occurring less than 5 times if the number of trials is 20 and the probability of success is 0.2"
+"0","pbinom(5, size=20, prob= 0.2)"
+"1","[1]"
+"1"," 0.8042078"
+"1","
+"
+"0","#probability is 80%"
+"0",""

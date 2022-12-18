@@ -1,0 +1,7 @@
+"0","# calculate the mean bill length of Adelie penguins from the previously subsetted data.frame"
+"0",""
+"0","mean(adelie_subset$bill_length_mm, na.rm= TRUE)  #na.rm argument strips missing values"
+"1","[1]"
+"1"," 38.79139"
+"1","
+"

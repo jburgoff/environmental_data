@@ -1,0 +1,6 @@
+"0","#Get the binomial quantile for the probability 0.5 if n= 10 and p=0.8"
+"0","qbinom(p=0.5, size= 10, prob=0.8) #8"
+"1","[1]"
+"1"," 8"
+"1","
+"

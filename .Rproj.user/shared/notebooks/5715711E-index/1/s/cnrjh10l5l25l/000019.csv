@@ -1,0 +1,2 @@
+"0",""
+"0","hist(ginkgo$notch_depth, xlab= ""Notch depth (mm)"", main= ""Histogam of ginkgo leaf notch depth"")"

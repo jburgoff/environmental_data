@@ -1,0 +1,2 @@
+"0",""
+"0","hist(ginkgo$petiole_length, xlab= ""Petiole length (mm)"", main= ""Histogram of ginkgo leaf petiole length"")"

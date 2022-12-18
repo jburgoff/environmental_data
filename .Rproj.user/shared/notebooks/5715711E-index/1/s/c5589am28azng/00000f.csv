@@ -1,0 +1,4 @@
+"0","#Create a histogram of penguin flipper lengths using the previously loaded penguins data"
+"0","hist(penguins$flipper_length_mm, main= ""Histogram of penguin flipper lengths"", xlab= ""Flipper length (mm)"","
+"0","     breaks= 8, #breaks argument specifies cell boundaries"
+"0",")"
